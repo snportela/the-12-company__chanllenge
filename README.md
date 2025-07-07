@@ -238,9 +238,13 @@ O candidato deve criar a página `/signup` com:
 - Teste todas as validações
 - Mantenha a consistência do código
 
+## Entrega do Teste
+
+Ao finalizar, faça upload do projeto em um repositório público no GitHub e envie o link para Rodrigo Pires no LinkedIn.
+
 ## Contato
 
-Para dúvidas sobre o teste, entre em contato com o recrutador.
+Para dúvidas sobre o teste, entre em contato com o Rodrigo Pires.
 
 ---
 
