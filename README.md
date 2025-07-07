@@ -4,7 +4,7 @@
 
 Este é um teste técnico para candidatos à vaga de estágio frontend. A aplicação consiste em uma página de login funcional baseada em um arquivo JSON com credenciais. **O candidato deve implementar a página de cadastro.**
 
-A data limite para a entrega do teste é sexta-feira (11/07) às 23h59.
+A data limite para a entrega do teste é **sexta-feira (11/07) às 23h59**.
 Quaisquer consultas necessárias para o teste estão liberadas, mas lembre-se que o que for desenvolvido será questionado na entrevista técnica.
 
 ## Funcionalidades
