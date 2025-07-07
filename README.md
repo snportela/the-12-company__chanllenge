@@ -2,12 +2,12 @@
 
 ## Descrição do Projeto
 
-Este é um teste técnico para candidatos à vaga de estágio frontend. A aplicação consiste em uma página de login funcional baseada em um arquivo JSON com credenciais e uma página de cadastro.
+Este é um teste técnico para candidatos à vaga de estágio frontend. A aplicação consiste em uma página de login funcional baseada em um arquivo JSON com credenciais. **O candidato deve implementar a página de cadastro.**
 
 ## Funcionalidades
 
 - ✅ **Página de Login**: Autenticação baseada em arquivo JSON
-- ✅ **Página de Cadastro**: Formulário de registro de novos usuários
+- 🔄 **Página de Cadastro**: **PRECISA SER IMPLEMENTADA PELO CANDIDATO**
 - ✅ **Dashboard**: Página protegida para usuários autenticados
 - ✅ **Validação de Formulários**: Validação em tempo real
 - ✅ **Feedback Visual**: Animações e estados de loading
@@ -72,7 +72,7 @@ A aplicação vem com algumas credenciais pré-definidas para teste:
 teste-frontend/
 ├── app/                    # App Router do Next.js
 │   ├── dashboard/         # Página do dashboard
-│   ├── signup/           # Página de cadastro
+│   ├── signup/           # Página de cadastro (PRECISA SER IMPLEMENTADA)
 │   ├── globals.css       # Estilos globais
 │   ├── layout.tsx        # Layout raiz
 │   └── page.tsx          # Página de login (home)
@@ -83,7 +83,6 @@ teste-frontend/
 │   └── index.ts          # Exportações
 ├── lib/                  # Utilitários
 │   └── auth.ts           # Funções de autenticação
-├── public/               # Arquivos estáticos
 └── package.json          # Dependências e scripts
 ```
 
@@ -98,15 +97,34 @@ teste-frontend/
 - Redirecionamento automático se já autenticado
 - Link para página de cadastro
 
-### Página de Cadastro (`/signup`)
+### Página de Cadastro (`/signup`) - **PRECISA SER IMPLEMENTADA**
 
-- Formulário completo de registro
-- Validação de email
-- Confirmação de senha
-- Validação de força da senha (mínimo 6 caracteres)
-- Verificação de usuário existente
-- Feedback de sucesso/erro
-- Redirecionamento para login após cadastro
+**O candidato deve implementar a página de cadastro com:**
+
+- [ ] Formulário completo de registro
+- [ ] Validação de email
+- [ ] Confirmação de senha
+- [ ] Validação de força da senha (mínimo 6 caracteres)
+- [ ] Verificação de usuário existente
+- [ ] Feedback de sucesso/erro
+- [ ] Redirecionamento para login após cadastro
+- [ ] Design consistente com a página de login
+
+**Exemplo de estrutura esperada:**
+
+```typescript
+// app/signup/page.tsx
+"use client";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Input, SubmitButton, Loader } from "@/components";
+
+const Signup = () => {
+  // Implementar formulário de cadastro
+  // Usar os componentes existentes
+  // Seguir o mesmo padrão visual do login
+};
+```
 
 ### Dashboard (`/dashboard`)
 
@@ -125,7 +143,7 @@ A autenticação é simulada usando:
 
 ## Estilo e Design
 
-O design segue o padrão do arquivo `example_page.tsx` fornecido:
+O design deve seguir o padrão fornecido:
 
 - **Cores**: Gradiente roxo (primary-purple: #4F46E5, secondary-purple: #7C3AED)
 - **Tipografia**: Inter (Google Fonts)
@@ -141,25 +159,84 @@ npm run start    # Servidor de produção
 npm run lint     # Linting do código
 ```
 
-## Considerações para o Teste
+## Desafio para o Candidato
 
-### O que foi implementado:
+### 🎯 **Implementar a Página de Cadastro**
 
-- ✅ Login funcional com credenciais JSON
-- ✅ Página de cadastro completa
-- ✅ Validações de formulário
-- ✅ Estados de loading e feedback
-- ✅ Design responsivo
-- ✅ Navegação entre páginas
-- ✅ Proteção de rotas
+O candidato deve criar a página `/signup` com:
 
-### Melhorias possíveis:
+1. **Formulário de Registro**:
+
+   - Campo de nome de usuário
+   - Campo de email
+   - Campo de senha
+   - Campo de confirmação de senha
+
+2. **Validações**:
+
+   - Email válido
+   - Senha com mínimo 6 caracteres
+   - Confirmação de senha igual
+   - Usuário não existente
+
+3. **Feedback Visual**:
+
+   - Estados de loading
+   - Mensagens de erro/sucesso
+   - Animações de shake para campos inválidos
+
+4. **Integração**:
+   - Usar os componentes existentes (`Input`, `SubmitButton`, `Loader`)
+   - Integrar com as funções de auth em `lib/auth.ts`
+   - Redirecionar para `/login` após cadastro bem-sucedido
+
+### 📝 **Critérios de Avaliação**
+
+- **Funcionalidade** (40 pontos): Formulário funciona corretamente
+- **Validação** (30 pontos): Validações implementadas adequadamente
+- **Design** (20 pontos): Consistência visual com o login
+- **Código** (10 pontos): Código limpo e bem estruturado
+
+### 🏆 **Funcionalidades Bônus (até 40 pontos extras)**
+
+**Sistema de Notificações (Toast) - +20 pontos**
+
+- [ ] Componente `Toast` reutilizável
+- [ ] Contexto para gerenciar notificações
+- [ ] Diferentes tipos: success, error, warning, info
+- [ ] Animações suaves
+- [ ] Auto-dismiss configurável
+
+**Melhorias de UX - +10 pontos**
+
+- [ ] Loading states em todos os botões
+- [ ] Skeleton loading no dashboard
+- [ ] Tooltips nos campos de formulário
+- [ ] Validação em tempo real
+- [ ] "Lembrar de mim" no login
+
+**Funcionalidades Avançadas - +10 pontos**
+
+- [ ] Página de recuperação de senha (`/forgot-password`)
+- [ ] Indicador de força de senha
+- [ ] Toggle de tema escuro/claro
+- [ ] Perfil do usuário no dashboard
+- [ ] Logout automático por inatividade
+
+### Outras melhorias possíveis:
 
 - 🔄 Integração com API real
 - 🔄 Persistência de dados em banco
 - 🔄 Testes automatizados
 - 🔄 PWA capabilities
 - 🔄 Tema escuro/claro
+
+### 💡 **Dicas**
+
+- Use os componentes existentes como base
+- Siga o mesmo padrão visual do login
+- Teste todas as validações
+- Mantenha a consistência do código
 
 ## Contato
 
