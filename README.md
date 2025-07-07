@@ -48,7 +48,7 @@ O candidato deve criar a página `/signup` com:
 - **Design** (20 pontos): Consistência visual com o login
 - **Código** (10 pontos): Código limpo e bem estruturado
 
-### 🏆 **Funcionalidades Bônus (opcionais) (até 40 pontos extras)**
+### (OPCIONAL) 🏆 **Funcionalidades Bônus (até 40 pontos extras)**
 
 **Sistema de Notificações (Toast) - +20 pontos**
 
