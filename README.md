@@ -1,11 +1,97 @@
 # Teste Técnico - Estágio Frontend
 
-## Descrição do Projeto
+## Descrição
 
-Este é um teste técnico para candidatos à vaga de estágio frontend. A aplicação consiste em uma página de login funcional baseada em um arquivo JSON com credenciais. **O candidato deve implementar a página de cadastro.**
+Este é um teste técnico para candidatos à vaga de estágio frontend. A aplicação consiste em uma página de login funcional baseada em um arquivo JSON com credenciais.
+
+## Entrega do Teste
 
 A data limite para a entrega do teste é **sexta-feira (11/07) às 23h59**.
 Quaisquer consultas necessárias para o teste estão liberadas, mas lembre-se que o que for desenvolvido será questionado na entrevista técnica.
+Ao finalizar, faça upload do projeto em um repositório público no GitHub e envie o link para Rodrigo Pires no LinkedIn.
+
+## Desafio para o Candidato
+
+### 🎯 **Implementar a Página de Cadastro**
+
+O candidato deve criar a página `/signup` com:
+
+1. **Formulário de Registro**:
+
+   - Campo de nome de usuário
+   - Campo de email
+   - Campo de senha
+   - Campo de confirmação de senha
+
+2. **Validações**:
+
+   - Email válido
+   - Senha com mínimo 6 caracteres
+   - Confirmação de senha igual
+   - Usuário não existente
+
+3. **Feedback Visual**:
+
+   - Estados de loading
+   - Mensagens de erro/sucesso
+   - Animações de shake para campos inválidos
+
+4. **Integração**:
+   - Usar os componentes existentes (`Input`, `SubmitButton`, `Loader`)
+   - Integrar com as funções de auth em `lib/auth.ts`
+   - Redirecionar para `/login` após cadastro bem-sucedido
+
+### 📝 **Critérios de Avaliação**
+
+- **Funcionalidade** (40 pontos): Formulário funciona corretamente
+- **Validação** (30 pontos): Validações implementadas adequadamente
+- **Design** (20 pontos): Consistência visual com o login
+- **Código** (10 pontos): Código limpo e bem estruturado
+
+### 🏆 **Funcionalidades Bônus (opcionais) (até 40 pontos extras)**
+
+**Sistema de Notificações (Toast) - +20 pontos**
+
+- [ ] Componente `Toast` reutilizável
+- [ ] Contexto para gerenciar notificações
+- [ ] Diferentes tipos: success, error, warning, info
+- [ ] Animações suaves
+- [ ] Auto-dismiss configurável
+
+**Melhorias de UX - +10 pontos**
+
+- [ ] Loading states em todos os botões
+- [ ] Skeleton loading no dashboard
+- [ ] Tooltips nos campos de formulário
+- [ ] Validação em tempo real
+- [ ] "Lembrar de mim" no login
+
+**Funcionalidades Avançadas - +10 pontos**
+
+- [ ] Página de recuperação de senha (`/forgot-password`)
+- [ ] Indicador de força de senha
+- [ ] Toggle de tema escuro/claro
+- [ ] Perfil do usuário no dashboard
+- [ ] Logout automático por inatividade
+
+### Outras melhorias possíveis:
+
+- 🔄 Integração com API real
+- 🔄 Persistência de dados em banco
+- 🔄 Testes automatizados
+- 🔄 PWA capabilities
+- 🔄 Tema escuro/claro
+
+### 💡 **Dicas**
+
+- Use os componentes existentes como base
+- Siga o mesmo padrão visual do login
+- Teste todas as validações
+- Mantenha a consistência do código
+
+---
+
+# Documentação do Projeto
 
 ## Funcionalidades
 
@@ -161,89 +247,6 @@ npm run build    # Build de produção
 npm run start    # Servidor de produção
 npm run lint     # Linting do código
 ```
-
-## Desafio para o Candidato
-
-### 🎯 **Implementar a Página de Cadastro**
-
-O candidato deve criar a página `/signup` com:
-
-1. **Formulário de Registro**:
-
-   - Campo de nome de usuário
-   - Campo de email
-   - Campo de senha
-   - Campo de confirmação de senha
-
-2. **Validações**:
-
-   - Email válido
-   - Senha com mínimo 6 caracteres
-   - Confirmação de senha igual
-   - Usuário não existente
-
-3. **Feedback Visual**:
-
-   - Estados de loading
-   - Mensagens de erro/sucesso
-   - Animações de shake para campos inválidos
-
-4. **Integração**:
-   - Usar os componentes existentes (`Input`, `SubmitButton`, `Loader`)
-   - Integrar com as funções de auth em `lib/auth.ts`
-   - Redirecionar para `/login` após cadastro bem-sucedido
-
-### 📝 **Critérios de Avaliação**
-
-- **Funcionalidade** (40 pontos): Formulário funciona corretamente
-- **Validação** (30 pontos): Validações implementadas adequadamente
-- **Design** (20 pontos): Consistência visual com o login
-- **Código** (10 pontos): Código limpo e bem estruturado
-
-### 🏆 **Funcionalidades Bônus (até 40 pontos extras)**
-
-**Sistema de Notificações (Toast) - +20 pontos**
-
-- [ ] Componente `Toast` reutilizável
-- [ ] Contexto para gerenciar notificações
-- [ ] Diferentes tipos: success, error, warning, info
-- [ ] Animações suaves
-- [ ] Auto-dismiss configurável
-
-**Melhorias de UX - +10 pontos**
-
-- [ ] Loading states em todos os botões
-- [ ] Skeleton loading no dashboard
-- [ ] Tooltips nos campos de formulário
-- [ ] Validação em tempo real
-- [ ] "Lembrar de mim" no login
-
-**Funcionalidades Avançadas - +10 pontos**
-
-- [ ] Página de recuperação de senha (`/forgot-password`)
-- [ ] Indicador de força de senha
-- [ ] Toggle de tema escuro/claro
-- [ ] Perfil do usuário no dashboard
-- [ ] Logout automático por inatividade
-
-### Outras melhorias possíveis:
-
-- 🔄 Integração com API real
-- 🔄 Persistência de dados em banco
-- 🔄 Testes automatizados
-- 🔄 PWA capabilities
-- 🔄 Tema escuro/claro
-
-### 💡 **Dicas**
-
-- Use os componentes existentes como base
-- Siga o mesmo padrão visual do login
-- Teste todas as validações
-- Mantenha a consistência do código
-
-## Entrega do Teste
-
-Ao finalizar, faça upload do projeto em um repositório público no GitHub e envie o link para Rodrigo Pires no LinkedIn.
 
 ## Contato
 
