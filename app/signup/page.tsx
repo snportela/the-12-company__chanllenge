@@ -1,23 +1,93 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Input, SubmitButton, Loader } from "@/components";
 import { Eye, EyeOff } from "lucide-react";
+import { registerUser } from "@/lib/auth";
+import { UserData, validate } from "@/lib/validation";
 
 const Signup = () => {
+  const { push } = useRouter();
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showPasswordConfirm, setShowPasswordConfirm] =
+    useState<boolean>(false);
+  const [isSubmitLoading, setIsSubmitLoading] = useState<boolean>(false);
 
-  const [signupData, setSignupData] = useState({
+  const [shakeUsername, setShakeUsername] = useState<boolean>(false);
+  const [shakeEmail, setShakeEmail] = useState<boolean>(false);
+  const [shakePassword, setShakePassword] = useState<boolean>(false);
+  const [shakePasswordConfirm, setShakePasswordConfirm] =
+    useState<boolean>(false);
+
+  const [initialData, setInitialData] = useState({
     username: "",
     email: "",
     password: "",
     passwordConfirm: "",
   });
 
+  const [formValues, setFormValues] = useState<UserData>(initialData);
+  const [formErrors, setFormErrors] = useState<UserData>();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setFormValues({ ...formValues, [id]: value });
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(signupData);
+
+    setIsSubmitLoading(true);
+
+    setShakeUsername(false);
+    setShakeEmail(false);
+    setShakePassword(false);
+    setShakePasswordConfirm(false);
+
+    if (Object.values(formValues).some((field) => !field)) {
+      if (!formValues.username) setShakeUsername(true);
+      if (!formValues.email) setShakeEmail(true);
+      if (!formValues.password) setShakePassword(true);
+      if (!formValues.passwordConfirm) setShakePasswordConfirm(true);
+      setIsSubmitLoading(false);
+      return;
+    }
+
+    setFormErrors(validate(formValues));
+
+    try {
+      const isValid = registerUser(
+        formValues.username,
+        formValues.password,
+        formValues.email
+      );
+
+      if (Object.values(validate(formValues)).every((field) => field === "")) {
+        if (await isValid) {
+          alert("usuario cadastrado");
+          push("/login");
+        } else {
+          alert("este ususario ja existe");
+        }
+      }
+    } catch (error) {
+      console.error("Erro no login:", error);
+    } finally {
+      setIsSubmitLoading(false);
+    }
   };
+
+  useEffect(() => {
+    if (shakeUsername || shakeEmail || shakePassword || shakePasswordConfirm) {
+      const timer = setTimeout(() => {
+        setShakeUsername(false);
+        setShakeEmail(false);
+        setShakePassword(false);
+        setShakePasswordConfirm(false);
+      }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [shakeUsername, shakeEmail, shakePassword, shakePasswordConfirm]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -32,50 +102,56 @@ const Signup = () => {
         <form onSubmit={handleSubmit} className="flex flex-col mt-8 relative">
           <label
             className="block text-base font-medium mt-8 mb-2"
-            htmlFor="username-input"
+            htmlFor="username"
           >
             Usuário
           </label>
           <Input
-            id="username-input"
+            id="username"
             type="text"
             placeholder="Digite seu usuário"
-            value={signupData.username}
-            onChange={(event) => {
-              setSignupData({ ...signupData, username: event?.target.value });
-            }}
+            value={formValues.username}
+            onChange={handleChange}
+            className={`${shakeUsername && "animate-shake"}`}
+            state={formErrors?.username ? "error" : "default"}
+            disabled={isSubmitLoading}
           />
+
+          <div className="text-red-700 text-sm mt-2">
+            {formErrors?.username}
+          </div>
 
           <label
             className="block text-base font-medium mt-8 mb-2"
-            htmlFor="email-input"
+            htmlFor="email"
           >
             E-mail
           </label>
           <Input
-            id="email-input"
+            id="email"
             type="text"
             placeholder="Digite seu e-mail"
-            value={signupData.email}
-            onChange={(event) => {
-              setSignupData({ ...signupData, email: event?.target.value });
-            }}
+            value={formValues.email}
+            onChange={handleChange}
+            className={`${shakeEmail && "animate-shake"}`}
+            state={formErrors?.email ? "error" : "default"}
+            disabled={isSubmitLoading}
           />
+
+          <div className="text-red-700 text-sm mt-2">{formErrors?.email}</div>
 
           <label
             className="block text-base font-medium mt-8 mb-2"
-            htmlFor="password-input"
+            htmlFor="password"
           >
             Senha
           </label>
           <Input
-            id="password-input"
+            id="password"
             type={showPassword ? "text" : "password"}
             placeholder="Digite sua senha"
-            value={signupData.password}
-            onChange={(event) => {
-              setSignupData({ ...signupData, password: event.target.value });
-            }}
+            value={formValues.password}
+            onChange={handleChange}
             icon={
               showPassword ? (
                 <EyeOff size={20} className="text-primary-purple" />
@@ -84,36 +160,55 @@ const Signup = () => {
               )
             }
             onClickIcon={() => setShowPassword((prev) => !prev)}
+            className={`${shakePassword && "animate-shake"}`}
+            state={formErrors?.password ? "error" : "default"}
+            disabled={isSubmitLoading}
           />
+
+          <div className="text-red-700 text-sm mt-2">
+            {formErrors?.password}
+          </div>
 
           <label
             className="block text-base font-medium mt-8 mb-2"
-            htmlFor="password-confirm-input"
+            htmlFor="passwordConfirm"
           >
             Confirmar senha
           </label>
           <Input
-            id="password-confirm-input"
-            type={showPassword ? "text" : "password"}
+            id="passwordConfirm"
+            type={showPasswordConfirm ? "text" : "password"}
             placeholder="Repita sua senha"
-            value={signupData.passwordConfirm}
-            onChange={(event) => {
-              setSignupData({
-                ...signupData,
-                passwordConfirm: event.target.value,
-              });
-            }}
+            value={formValues.passwordConfirm}
+            onChange={handleChange}
             icon={
-              showPassword ? (
+              showPasswordConfirm ? (
                 <EyeOff size={20} className="text-primary-purple" />
               ) : (
                 <Eye size={20} className="text-primary-purple" />
               )
             }
-            onClickIcon={() => setShowPassword((prev) => !prev)}
+            onClickIcon={() => setShowPasswordConfirm((prev) => !prev)}
+            className={`${shakePasswordConfirm && "animate-shake"}`}
+            state={formErrors?.passwordConfirm ? "error" : "default"}
+            disabled={isSubmitLoading}
           />
 
-          <SubmitButton title="Cadastrar" className="mt-8" />
+          <div className="text-red-700 text-sm mt-2">
+            {formErrors?.passwordConfirm}
+          </div>
+
+          <SubmitButton
+            title="Cadastrar"
+            className="mt-8"
+            disabled={isSubmitLoading}
+          />
+
+          {isSubmitLoading && (
+            <div className="absolute top-1/2 transform -translate-y-1/2 w-full">
+              <Loader />
+            </div>
+          )}
         </form>
       </div>
     </div>
