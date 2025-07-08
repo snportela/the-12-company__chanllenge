@@ -1,5 +1,5 @@
 // Credentials data
-const credentials = {
+export const credentials = {
   users: [
     {
       username: "admin",

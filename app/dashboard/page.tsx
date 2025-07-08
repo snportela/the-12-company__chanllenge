@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { LogOut, User } from "lucide-react";
 
-import { isAuthenticated, logout } from "@/lib/auth";
+import { credentials, isAuthenticated, logout } from "@/lib/auth";
 
 const Dashboard = () => {
   const { push } = useRouter();
@@ -58,7 +58,30 @@ const Dashboard = () => {
               Você está logado com sucesso. Esta é uma página de exemplo do
               dashboard.
             </p>
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4"></div>
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <table className="text-gray-900 w-full">
+                <thead>
+                  <tr>
+                    <th className="text-center text-lg border-r border-gray-300">
+                      Usuário
+                    </th>
+                    <th className="text-center text-lg">Email</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {credentials.users.map((user) => {
+                    return (
+                      <tr className="w-[50%] text-center" key={user.username}>
+                        <td className="w-[50%] text-center border-r border-gray-300">
+                          {user.username}
+                        </td>
+                        <td>{user.email}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </main>
