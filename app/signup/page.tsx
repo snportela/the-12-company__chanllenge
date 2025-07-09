@@ -5,6 +5,7 @@ import { Input, SubmitButton, Loader } from "@/components";
 import { Eye, EyeOff } from "lucide-react";
 import { registerUser } from "@/lib/auth";
 import { UserData, validate } from "@/lib/validation";
+import { useToast } from "@/components/Toast";
 
 const Signup = () => {
   const { push } = useRouter();
@@ -19,15 +20,17 @@ const Signup = () => {
   const [shakePasswordConfirm, setShakePasswordConfirm] =
     useState<boolean>(false);
 
-  const [initialData, setInitialData] = useState({
+  const initialData = {
     username: "",
     email: "",
     password: "",
     passwordConfirm: "",
-  });
+  };
 
   const [formValues, setFormValues] = useState<UserData>(initialData);
   const [formErrors, setFormErrors] = useState<UserData>();
+
+  const { addToast } = useToast();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
@@ -64,10 +67,10 @@ const Signup = () => {
 
       if (Object.values(validate(formValues)).every((field) => field === "")) {
         if (await isValid) {
-          alert("usuario cadastrado");
+          addToast("Usuário cadastrado com sucesso!", "success");
           push("/login");
         } else {
-          alert("este ususario ja existe");
+          addToast("Este usuário já existe!", "error");
         }
       }
     } catch (error) {
