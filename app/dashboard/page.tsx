@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { LogOut, User } from "lucide-react";
 
@@ -7,6 +7,13 @@ import { credentials, isAuthenticated, logout } from "@/lib/auth";
 
 const Dashboard = () => {
   const { push } = useRouter();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+  }, []);
 
   useEffect(() => {
     if (!isAuthenticated()) {
@@ -59,28 +66,69 @@ const Dashboard = () => {
               dashboard.
             </p>
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-              <table className="text-gray-900 w-full">
-                <thead>
-                  <tr>
-                    <th className="text-center text-lg border-r border-gray-300">
-                      Usuário
-                    </th>
-                    <th className="text-center text-lg">Email</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {credentials.users.map((user) => {
-                    return (
-                      <tr className="w-[50%] text-center" key={user.username}>
-                        <td className="w-[50%] text-center border-r border-gray-300">
-                          {user.username}
-                        </td>
-                        <td>{user.email}</td>
+              {isLoading ? (
+                <div>
+                  <table className="text-gray-900 w-full">
+                    <thead>
+                      <tr>
+                        <th className="text-center text-lg border-r border-gray-300">
+                          Usuário
+                        </th>
+                        <th className="text-center text-lg">Email</th>
                       </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
+                    </thead>
+                    <tbody>
+                      <tr className="w-[50%] text-center animate-pulse">
+                        <td className="w-[50%] text-center border-r border-gray-300">
+                          <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-400 w-[30%] mx-auto mb-4" />
+                        </td>
+                        <td>
+                          <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-400 w-[45%] mx-auto mb-4" />
+                        </td>
+                      </tr>
+                      <tr className="w-[50%] text-center animate-pulse">
+                        <td className="w-[50%] text-center border-r border-gray-300">
+                          <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-400 w-[35%] mx-auto mb-4" />
+                        </td>
+                        <td>
+                          <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-400 w-[60%] mx-auto mb-4" />
+                        </td>
+                      </tr>
+                      <tr className="w-[50%] text-center animate-pulse">
+                        <td className="w-[50%] text-center border-r border-gray-300">
+                          <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-400 w-[20%] mx-auto mb-4" />
+                        </td>
+                        <td>
+                          <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-400 w-[55%] mx-auto mb-4" />
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              ) : (
+                <table className="text-gray-900 w-full">
+                  <thead>
+                    <tr>
+                      <th className="text-center text-lg border-r border-gray-300">
+                        Usuário
+                      </th>
+                      <th className="text-center text-lg">Email</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {credentials.users.map((user) => {
+                      return (
+                        <tr className="w-[50%] text-center" key={user.username}>
+                          <td className="w-[50%] text-center border-r border-gray-300">
+                            {user.username}
+                          </td>
+                          <td>{user.email}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              )}
             </div>
           </div>
         </div>
