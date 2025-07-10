@@ -2,10 +2,11 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Input, SubmitButton, Loader } from "@/components";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Info } from "lucide-react";
 import { registerUser } from "@/lib/auth";
 import { UserData, validate } from "@/lib/validation";
 import { useToast } from "@/components/Toast";
+import Tooltip from "@/components/Tooltip";
 
 const Signup = () => {
   const { push } = useRouter();
@@ -102,13 +103,16 @@ const Signup = () => {
           </span>
         </h1>
 
-        <form onSubmit={handleSubmit} className="flex flex-col mt-8 relative">
-          <label
-            className="block text-base font-medium mt-8 mb-2"
-            htmlFor="username"
-          >
-            Usuário
-          </label>
+        <form onSubmit={handleSubmit} className="flex flex-col mt-8">
+          <div className="flex align-center mt-8 mb-2">
+            <label className="font-medium mr-1" htmlFor="username">
+              Usuário
+            </label>
+            <Tooltip content="Seu nome de usuário.">
+              <Info className="text-gray-800" />
+            </Tooltip>
+          </div>
+
           <Input
             id="username"
             type="text"
@@ -124,12 +128,15 @@ const Signup = () => {
             {formErrors?.username}
           </div>
 
-          <label
-            className="block text-base font-medium mt-8 mb-2"
-            htmlFor="email"
-          >
-            E-mail
-          </label>
+          <div className="flex align-center mt-8 mb-2">
+            <label className="font-medium mr-1" htmlFor="email">
+              E-mail
+            </label>
+            <Tooltip content="Insira um e-mail válido.">
+              <Info className="text-gray-800" />
+            </Tooltip>
+          </div>
+
           <Input
             id="email"
             type="text"
@@ -143,12 +150,15 @@ const Signup = () => {
 
           <div className="text-red-700 text-sm mt-2">{formErrors?.email}</div>
 
-          <label
-            className="block text-base font-medium mt-8 mb-2"
-            htmlFor="password"
-          >
-            Senha
-          </label>
+          <div className="flex align-center mt-8 mb-2">
+            <label className="font-medium mr-1" htmlFor="password">
+              Senha
+            </label>
+            <Tooltip content="Deve conter no mínimo 6 caracteres.">
+              <Info className="text-gray-800" />
+            </Tooltip>
+          </div>
+
           <Input
             id="password"
             type={showPassword ? "text" : "password"}
@@ -172,12 +182,15 @@ const Signup = () => {
             {formErrors?.password}
           </div>
 
-          <label
-            className="block text-base font-medium mt-8 mb-2"
-            htmlFor="passwordConfirm"
-          >
-            Confirmar senha
-          </label>
+          <div className="flex align-center mt-8 mb-2">
+            <label className="font-medium mr-1" htmlFor="passwordConfirm">
+              Confirmar senha
+            </label>
+            <Tooltip content="As senhas devem ser iguais.">
+              <Info className="text-gray-800" />
+            </Tooltip>
+          </div>
+
           <Input
             id="passwordConfirm"
             type={showPasswordConfirm ? "text" : "password"}
