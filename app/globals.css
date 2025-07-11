@@ -2,8 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
+.light {
+  --primary-background: 249, 250, 251;
+  --secondary-background: 255, 255, 255;
+
+  --menu-border: 255, 255, 255;
+
+  --button-background: 243 244 246;
+  --button-hover: 209 213 219;
+  --button-light: 209 213 219;
+
+  --table-background: 239 246 255;
+  --table-border: 191 219 254;
+
+  --title-text: 3 7 18;
+  --primary-text: 55 65 81;
+  --secondary-text: 75 85 99;
+}
+
+.dark {
+  --primary-background: 24 24 27;
+  --secondary-background: 0 0 0;
+
+  --menu-border: 0, 0, 0;
+
+  --button-background: 55 65 81;
+  --button-hover: 31 41 55;
+  --button-dark: 31 41 55;
+
+  --table-background: 39 39 42;
+  --table-border: 3 7 18;
+
+  --title-text: 209 213 219;
+  --primary-text: 241 245 249;
+  --secondary-text: 248 250 252;
+}
+
 @layer components {
   .gradient-text {
     @apply bg-gradient-to-r bg-clip-text text-transparent;
   }
-} 
+}
